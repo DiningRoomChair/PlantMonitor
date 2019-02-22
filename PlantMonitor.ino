@@ -21,6 +21,13 @@ void setup()
 }
 void loop()
 {
+  //initialize acceptable ranges
+  double minTemp = 20;
+  double maxTemp = 22;
+  double minHum = 30;
+  double maxHum = 40;
+  double minLight = 600;
+  
   DHT.read(dht11_data);
   //read and set sensor outputs
   light = analogRead(lightpin);
@@ -29,7 +36,7 @@ void loop()
   //print light sensor output and adjust LED
   Serial.print("Light=");
   Serial.println(light);
-  if(light < 700){
+  if(light < minLight){
     digitalWrite(lightled, HIGH);
   }
   else{
@@ -38,7 +45,7 @@ void loop()
   //print temp sensor output and adjust LED
   Serial.print("Temp=");
   Serial.println(temp,DEC);
-  if(temp > 22){
+  if(temp < minTemp || temp > maxTemp){
     digitalWrite(templed, HIGH);
   }
   else{
@@ -47,7 +54,7 @@ void loop()
   //print humidity sensor output and adjust LED
   Serial.print("Humidity=");
   Serial.println(hum,DEC);
-  if(hum > 40){
+  if(hum < minHum || hum > maxHum){
     digitalWrite(humled, HIGH);
   }
   else{
