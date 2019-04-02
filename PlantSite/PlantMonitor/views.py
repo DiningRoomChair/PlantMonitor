@@ -24,6 +24,9 @@ def index(request):
         if read_serial[0][2:] == "Light" and int(read_serial[1][:-1]) > 0:
             light = int(read_serial[1][:-1])
 
-    return HttpResponse("Temperature: " + str(temp) + "<br/>\
-                        Light: " + str(light) + "<br/>\
-                        Humidity: " + str(humidity))
+    return HttpResponse("<h2>Current Plant Readings</h2>\
+                        <table style='border:solid;border-collapse:collapse'>\
+                        <tr><th style='border:solid'>Temperature</th><td style='border:solid'>" + str(temp) + "</td></tr>\
+                        <tr><th style='border:solid'>Light</th><td style='border:solid'>" + str(light) + "</td></tr>\
+                        <tr><th style='border:solid'>Humidity</th><td style='border:solid'>" + str(humidity) + "</td></tr>\
+                        </table>")
